@@ -1,8 +1,13 @@
-import { getChampionsData } from "./championData.js";
+import { getChampionsData, getChampionDetails } from "./championData.js";
 
 
 const VERSION = "13.18.1";
+const BASE_URL = `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/es_ES/champion.json`
 const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/champion/`;
+
+
+
+
 
 // Función para renderizar los campeones en el DOM
 const renderChampions = async () => {
@@ -13,21 +18,19 @@ const renderChampions = async () => {
         championList.innerHTML = ""; // Limpiar la lista antes de llenarla
 
         Object.values(champions).forEach(champ => {
+            console.log(champ);
             const listItem = document.createElement("li");
             listItem.classList.add("champion-item");
 
              // Crear imagen
              const champImg = document.createElement("img");
-             champImg.src = `${IMAGE_BASE_URL}${champ.id}.png`;
+             champImg.src = `${IMAGE_BASE_URL}${champ.image.full}`;
              champImg.alt = champ.name;
-             champImg.width = 50; // Ajusta el tamaño según tus necesidades
-             champImg.height = 50;
              champImg.classList.add("champion-image");
-
-
+            
              // Crear texto
             const champText = document.createElement("span");
-            champText.textContent = ` ${champ.name} - ${champ.title}`;
+            champText.textContent = ` ${champ.name}`;
             champText.classList.add("champion-text");
 
              // Animación de entrada
@@ -50,11 +53,6 @@ const renderChampions = async () => {
                  listItem.style.transition = "all 0.3s ease";
              });
  
-             // Agregar evento de selección
-             listItem.addEventListener("click", () => {
-                 alert(`Has seleccionado a ${champ.name}: ${champ.title}`);
-             });
-
 
              // Agregar imagen y texto al <li>
              listItem.appendChild(champImg);
@@ -65,9 +63,10 @@ const renderChampions = async () => {
          
         });
     } catch (error) {
-        console.error("Error al renderizar los campeones:", error);
+        console.error("Error al cargar los campeones:", error);
     }
 };
+
 
 // Llamar a la función para renderizar la lista de campeones
 renderChampions();
