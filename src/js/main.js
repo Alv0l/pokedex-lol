@@ -5,10 +5,6 @@ const VERSION = "13.18.1";
 const BASE_URL = `https://ddragon.leagueoflegends.com/cdn/${VERSION}/data/es_ES/champion.json`
 const IMAGE_BASE_URL = `https://ddragon.leagueoflegends.com/cdn/${VERSION}/img/champion/`;
 
-
-
-
-
 // Función para renderizar los campeones en el DOM
 const renderChampions = async () => {
     try {
